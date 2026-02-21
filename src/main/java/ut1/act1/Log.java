@@ -18,7 +18,6 @@ public class Log {
 
         // Si no existe el directorio o fichero, crearlos
         if (!dirLog.exists()) {
-            // Creamos un a estructura de control para controlar el error IOException
             dirLog.mkdir();
         }
 
