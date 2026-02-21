@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        int opcion = 0;
 
         // ruta del directorio de logs y archivos
         String rutaLog = "./log";
@@ -22,14 +23,46 @@ public class Main {
         Files files = new Files(rutaFiles);
         Log log = new Log(rutaLog);
 
-        System.out.println("hola\nhola");
-        System.out.println("hola");
-
         // Creamos el menú interactivo que permite hacer operaciones
         while (!salir) {
             limpiarPantalla();
-            System.out.println("prueba");
-            sc.next();
+
+            // Mostramos el menú interactivo y pedimos una opción que recogemos con un Scanner
+            System.out.print("\t\t.:MENU FICHEROS:.\n1. Crear fichero\n2. Leer fichero\n3. Editar fichero\n4. Borrar fichero\n5. Salir\n\nQue quieres hacer: ");
+
+            // Hacemos también una estructura de control por si el usuario no introduce un numero entero
+            try {
+                opcion = sc.nextInt();
+
+                // Si el numero no esta dentro del rango, también lo mandamos al catch
+                if (opcion > 0 && opcion <= 5) {
+                    switch (opcion) {
+                        case 1:
+                            limpiarPantalla();
+                            System.out.println();
+                            break;
+                        case 2:
+
+                            break;
+                        case 3:
+
+                            break;
+                        case 4:
+
+                            break;
+                        case 5:
+                            salir = true;
+                            break;
+                    }
+                } else {
+                    throw new IllegalArgumentException();
+                }
+            } catch (Exception e) {
+                System.err.println("Solo se pueden introducir valores entre 1-5\n");
+
+                // Pasamos la linea del escaner para que no entre en bucles de error
+                sc.nextLine();
+            }
         }
     }
 
