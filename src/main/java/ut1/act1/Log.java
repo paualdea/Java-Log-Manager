@@ -5,26 +5,23 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Log {
-    // Variables para recopilar fecha y hora para añadir al log
-    private LocalDateTime horaActual;
-    private DateTimeFormatter FORMATO = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-
-    private File dirLog, log;
-    private String mensaje;
+    final private DateTimeFormatter FORMATO = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    final private File log;
 
     /**
      * Constructor de la clase que sirve para ir añadiendo registros al fichero de log de la aplicación.
      * Cuándo se cree un objeto de tipo Log, leera o creara el archivo.
-     *
-     * Sólo recibe cómo parametro la ruta del directorio de logs.
+
      * @param ruta
+     * Contiene la ruta del fichero de log
      */
     public Log (String ruta) {
         // Creamos un objeto de tipo File para la carpeta del log y un fichero que sera el log en sí
-        dirLog = new File(ruta);
+        File dirLog = new File(ruta);
         log = new File(dirLog, "log.txt");
 
         // Si no existe el directorio o fichero, crearlos
+        String mensaje;
         if (!dirLog.exists()) {
             try {
                 dirLog.mkdir();
@@ -55,12 +52,13 @@ public class Log {
     /**
      * Esta función crea un log dentro del fichero de logs para determinar el estado de una acción sobre
      * el sistema de ficheros
-     *
-     * Recibe cómo parámetros el tipo de operación, resultado de la operación y mensaje
-     * de la operación si es que ocurre
+
      * @param operacion
+     * Contiene el tipo de operación que se registra
      * @param resultado
+     * Contiene un booleano de resultado
      * @param mensaje
+     * Contiene el mensaje que va a ir junto al log
      */
     public void crearLog (String operacion, boolean resultado, String mensaje) {
         String estado;
@@ -79,7 +77,8 @@ public class Log {
         }
 
         // Obtenemos la hora actual y la formateamos correctamente
-        horaActual = LocalDateTime.now();
+        // Variables para recopilar fecha y hora para añadir al log
+        LocalDateTime horaActual = LocalDateTime.now();
         String hora = horaActual.format(FORMATO);
 
         String formatoLog =  hora + " | " + operacion + " | " + estado + " | " + mensaje + "\n";

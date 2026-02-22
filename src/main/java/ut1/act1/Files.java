@@ -2,16 +2,12 @@ package ut1.act1;
 
 // IMPORTS
 import java.io.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Files {
-    public static final int TIEMPO_ESPERA = 1250;
-
-    private File dirFiles;
-    private String rutaLog = "./log";;
-    private Log log = new Log(rutaLog);
+    final private File dirFiles;
+    final private String rutaLog = "./log";
+    final private Log log = new Log(rutaLog);
     private String mensaje;
 
     public Files (String ruta) {
@@ -32,9 +28,9 @@ public class Files {
 
     /**
      * Creamos una función que crea un nuevo archivo en la ruta ./files
-     *
-     * Recibe como párametro el nombre del fichero de texto a crear
+
      * @param nombre
+     * Recibe como párametro el nombre del fichero de texto a crear
      */
     public void nuevoFichero (String nombre) {
         File nuevoFichero = new File(dirFiles, nombre+".txt");
@@ -61,7 +57,7 @@ public class Files {
      * @return numeroFicheros
      */
     public ArrayList<String> listarFicheros () {
-        ArrayList<String> listaFicheros = new ArrayList<String>();
+        ArrayList<String> listaFicheros = new ArrayList<>();
 
         // Comprobamos que la ruta de los ficheros sea un directorio
         if (dirFiles.isDirectory()) {
@@ -85,10 +81,13 @@ public class Files {
 
     /**
      * Esta función muestra por pantalla el contenido de un documento seleccionado
-     *
-c     * @param ruta
+
+     * @param ruta
+     * Contiene la ruta del fichero a mostrar
      * @param lista
+     * El arraylist que contiene todos los ficheros del directorio ./files
      * @param opcion
+     * Contiene la opción que ha seleccionado el usuario
      */
     public void mostrarFichero (String ruta, ArrayList<String> lista, String opcion) {
         // Obtenemos la ruta del fichero y creamos un bufferedReader
@@ -117,11 +116,13 @@ c     * @param ruta
 
     /**
      * Esta función elimina el fichero seleccionado por el usuario, pasado por parametro
-     *
-     *Recibe cómo parametros la ruta del fichero, la lista de ficheros y la opción seleccionada por el usuario
+
      * @param ruta
+     * Contiene la ruta del fichero a mostrar
      * @param lista
+     * El arraylist que contiene todos los ficheros del directorio ./files
      * @param opcion
+     * Contiene la opción que ha seleccionado el usuario
      */
     public void eliminarFichero (String ruta, ArrayList<String> lista, String opcion) {
         File ficheroBorrar = new File(ruta, lista.get(Integer.parseInt(opcion) - 1));

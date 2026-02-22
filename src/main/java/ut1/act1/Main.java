@@ -1,10 +1,6 @@
 package ut1.act1;
 
 // IMPORTS
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,12 +15,12 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int opcion = 0;
+        int opcion;
 
         // ruta del directorio de archivos
         String rutaFiles = "./files";
 
-        Boolean salir = false;
+        boolean salir = false;
 
         // Creamos el objeto files y log
         Files files = new Files(rutaFiles);
@@ -58,7 +54,7 @@ public class Main {
                             break;
                         // Lectura fichero
                         case 2:
-                            String opcion_aux = null;
+                            String opcion_aux;
 
                             // Creamos un ArrayList para guardar los ficheros de la carpeta ./files
                             ArrayList<String> listaFicheros = files.listarFicheros();
@@ -94,7 +90,7 @@ public class Main {
 
                             break;
                         case 3:
-                            String opcion_auxx = null;
+                            String opcion_auxx;
 
                             // Creamos un ArrayList para guardar los ficheros de la carpeta ./files
                             ArrayList<String> listaFicheross = files.listarFicheros();
