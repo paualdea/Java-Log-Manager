@@ -18,5 +18,11 @@ El sistema consiste en un gestor del sistema de archivos mientras un sistema de 
 * **`Files.java`**: Controla las acciones sobre el sistema de archivos (lectura, escritura y borrado).
 * **`Log.java`**: Clase que controla las acciones sobre el _log_.
 
+## Ejecución
+
+Para ejecutar este programa, basta con descargar el fichero `Java-Log-Manager_vx.x.x.jar` de las _releases_ y ejecutarlo con `java -jar Java-Log-Manager_vx.x.x.jar` desde cualquier sistema con Java instalado.
+
+Funciona con Windows, Mac y Linux.
+
 ___
 Este proyecto sirve como control de versiones y evidencia del trabajo realizado para la asignatura de Acceso a Datos.
