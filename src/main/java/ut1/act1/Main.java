@@ -21,15 +21,13 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
 
-        // ruta del directorio de logs y archivos
-        String rutaLog = "./log";
+        // ruta del directorio de archivos
         String rutaFiles = "./files";
 
         Boolean salir = false;
 
         // Creamos el objeto files y log
         Files files = new Files(rutaFiles);
-        Log log = new Log(rutaLog);
 
         // Creamos el menú interactivo que permite hacer operaciones
         while (!salir) {

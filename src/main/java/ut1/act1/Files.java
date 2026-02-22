@@ -2,12 +2,17 @@ package ut1.act1;
 
 // IMPORTS
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Files {
     public static final int TIEMPO_ESPERA = 1250;
 
     private File dirFiles;
+    private String rutaLog = "./log";;
+    private Log log = new Log(rutaLog);
+    private String mensaje;
 
     public Files (String ruta) {
         // Creamos otro objeto de tipo File para la ruta de los ficheros que manejaremos
@@ -15,7 +20,13 @@ public class Files {
 
         // Si no existe el directorio o fichero, crearlos
         if (!dirFiles.exists()) {
-            dirFiles.mkdir();
+            try {
+                dirFiles.mkdir();
+                log.crearLog("escritura", true, "Se ha creado el directorio " + dirFiles + " correctamente");
+            } catch (Exception e) {
+                System.err.println("No se ha podido crear el directorio");
+            }
+
         }
     }
 
@@ -31,8 +42,12 @@ public class Files {
         if (!nuevoFichero.exists()) {
             try {
                 nuevoFichero.createNewFile();
+                log.crearLog("escritura", true, "Se ha creado el fichero " + nuevoFichero + " correctamente");
             } catch (IOException e) {
-                System.err.println("No se pudo crear el nuevo fichero " + nuevoFichero + ".txt");
+                mensaje = "No se pudo crear el nuevo fichero " + nuevoFichero + ".txt";
+
+                System.err.println(mensaje);
+                log.crearLog("escritura", false, mensaje);
             }
         } else {
             System.out.println("El fichero " + nuevoFichero + ".txt, ya existe, no se creará");
@@ -91,8 +106,12 @@ c     * @param ruta
             while ((linea = br.readLine()) != null) {
                 System.out.println(linea);
             }
+            log.crearLog("lectura", true, "Se ha leido el fichero " + ficheroLeer + " correctamente");
         } catch (IOException e) {
-            System.err.println("Error en la lectura del fichero a mostrar");
+            mensaje = "Error en la lectura del fichero a mostrar";
+
+            System.err.println(mensaje);
+            log.crearLog("lectura", false, mensaje);
         }
     }
 
@@ -108,6 +127,14 @@ c     * @param ruta
         File ficheroBorrar = new File(ruta, lista.get(Integer.parseInt(opcion) - 1));
 
         // Eliminamos el fichero
-        ficheroBorrar.delete();
+        try {
+            ficheroBorrar.delete();
+            log.crearLog("borrado", true, "Fichero " + ficheroBorrar + " eliminado");
+        } catch (Exception e) {
+            mensaje = "Error al borrar el fichero" + ficheroBorrar;
+
+            System.err.println(mensaje);
+            log.crearLog("borrado", false, mensaje);
+        }
     }
 }
