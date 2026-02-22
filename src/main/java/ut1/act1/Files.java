@@ -71,7 +71,8 @@ public class Files {
     /**
      * Esta función muestra por pantalla el contenido de un documento seleccionado
      *
-     * Recibe cómo parametro el numero de documento, que se quiere leer
+c     * @param ruta
+     * @param lista
      * @param opcion
      */
     public void mostrarFichero (String ruta, ArrayList<String> lista, String opcion) {
@@ -93,5 +94,20 @@ public class Files {
         } catch (IOException e) {
             System.err.println("Error en la lectura del fichero a mostrar");
         }
+    }
+
+    /**
+     * Esta función elimina el fichero seleccionado por el usuario, pasado por parametro
+     *
+     *Recibe cómo parametros la ruta del fichero, la lista de ficheros y la opción seleccionada por el usuario
+     * @param ruta
+     * @param lista
+     * @param opcion
+     */
+    public void eliminarFichero (String ruta, ArrayList<String> lista, String opcion) {
+        File ficheroBorrar = new File(ruta, lista.get(Integer.parseInt(opcion) - 1));
+
+        // Eliminamos el fichero
+        ficheroBorrar.delete();
     }
 }

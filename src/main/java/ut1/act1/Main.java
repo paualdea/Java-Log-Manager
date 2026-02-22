@@ -69,9 +69,11 @@ public class Main {
                             System.out.println("\t\t.:LISTA FICHEROS:.\n");
 
                             // Listamos todos los ficheros del ArrayList
-                            for (int i=0; i<listaFicheros.size(); i++) {
+                            int i;
+                            for (i=0; i<listaFicheros.size(); i++) {
                                 System.out.println((i+1) + ". " + listaFicheros.get(i));
                             }
+                            System.out.println((i + 1) + ". Salir");
 
                             System.out.print("Que fichero quieres consultar: ");
                             opcion_aux = sc.next();
@@ -88,13 +90,45 @@ public class Main {
 
                                 espera();
                             } else {
-                                System.err.println("Valor incorrecto");
+                                System.err.println("Saliendo...");
                                 espera();
                             }
 
                             break;
                         case 3:
+                            String opcion_auxx = null;
 
+                            // Creamos un ArrayList para guardar los ficheros de la carpeta ./files
+                            ArrayList<String> listaFicheross = files.listarFicheros();
+
+                            limpiarPantalla();
+                            System.out.println("\t\t.:LISTA FICHEROS:.\n");
+
+                            // Listamos todos los ficheros del ArrayList
+                            int j;
+                            for (j=0; j<listaFicheross.size(); j++) {
+                                System.out.println((j+1) + ". " + listaFicheross.get(j));
+                            }
+                            System.out.println((j + 1) + ". Salir");
+
+                            System.out.print("Que fichero quieres eliminar: ");
+                            opcion_auxx = sc.next();
+
+                            /*
+                                Comprobamos que la opción que se haya leido sea un numero mayor que cero y menos
+                                que el tamaño de la lista de ficheros.
+                             */
+                            if (Integer.parseInt(opcion_auxx) > 0 && Integer.parseInt(opcion_auxx) <= listaFicheross.size()) {
+                                limpiarPantalla();
+
+                                // Llamamos a la función que nos imprime por pantalla el contenido del documento
+                                files.eliminarFichero(rutaFiles, listaFicheross, opcion_auxx);
+
+                                espera();
+                            } else {
+                                System.err.println("Saliendo...");
+                                espera();
+                            }
                             break;
                         case 4:
                             salir = true;
