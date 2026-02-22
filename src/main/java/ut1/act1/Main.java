@@ -1,5 +1,11 @@
 package ut1.act1;
 
+// IMPORTS
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.nio.Buffer;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -9,6 +15,8 @@ import java.util.Scanner;
  * @see Log
  */
 public class Main {
+    public static final int TIEMPO_ESPERA = 1250;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
@@ -28,15 +36,16 @@ public class Main {
             limpiarPantalla();
 
             // Mostramos el menú interactivo y pedimos una opción que recogemos con un Scanner
-            System.out.print("\t\t.:MENU FICHEROS:.\n1. Crear fichero\n2. Leer fichero\n3. Editar fichero\n4. Borrar fichero\n5. Salir\n\nQue quieres hacer: ");
+            System.out.print("\t\t.:MENU FICHEROS:.\n1. Crear fichero\n2. Leer fichero\n3. Borrar fichero\n4. Salir\n\nQue quieres hacer: ");
 
             // Hacemos también una estructura de control por si el usuario no introduce un numero entero
             try {
                 opcion = sc.nextInt();
 
                 // Si el numero no esta dentro del rango, también lo mandamos al catch
-                if (opcion > 0 && opcion <= 5) {
+                if (opcion > 0 && opcion <= 4) {
                     switch (opcion) {
+                        // Creación fichero
                         case 1:
                             limpiarPantalla();
 
@@ -47,22 +56,47 @@ public class Main {
                             files.nuevoFichero(nombre);
 
                             // Añadimos un segundo de delay
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                System.err.println("Error haciendo la pausa de 1s");
-                            }
+                            espera();
                             break;
+                        // Lectura fichero
                         case 2:
+                            String opcion_aux = null;
+
+                            // Creamos un ArrayList para guardar los ficheros de la carpeta ./files
+                            ArrayList<String> listaFicheros = files.listarFicheros();
+
+                            limpiarPantalla();
+                            System.out.println("\t\t.:LISTA FICHEROS:.\n");
+
+                            // Listamos todos los ficheros del ArrayList
+                            for (int i=0; i<listaFicheros.size(); i++) {
+                                System.out.println((i+1) + ". " + listaFicheros.get(i));
+                            }
+
+                            System.out.print("Que fichero quieres consultar: ");
+                            opcion_aux = sc.next();
+
+                            /*
+                                Comprobamos que la opción que se haya leido sea un numero mayor que cero y menos
+                                que el tamaño de la lista de ficheros.
+                             */
+                            if (Integer.parseInt(opcion_aux) > 0 && Integer.parseInt(opcion_aux) <= listaFicheros.size()) {
+                                limpiarPantalla();
+
+                                // Llamamos a la función que nos imprime por pantalla el contenido del documento
+                                files.mostrarFichero(rutaFiles, listaFicheros, opcion_aux);
+
+                                espera();
+                            } else {
+                                System.err.println("Valor incorrecto");
+                                espera();
+                            }
 
                             break;
                         case 3:
 
                             break;
                         case 4:
-
-                            break;
-                        case 5:
                             salir = true;
                             break;
                     }
@@ -70,7 +104,8 @@ public class Main {
                     throw new IllegalArgumentException();
                 }
             } catch (Exception e) {
-                System.err.println("Solo se pueden introducir valores entre 1-5\n");
+                System.err.println("Solo se pueden introducir valores entre 1-4\n");
+                espera();
 
                 // Pasamos la linea del escaner para que no entre en bucles de error
                 sc.nextLine();
@@ -97,6 +132,17 @@ public class Main {
             }
         } catch (Exception e) {
             System.err.println("Error al limpiar la pantalla.\n" + e.getMessage());
+        }
+    }
+
+    /**
+     * Esta función ejecuta un bloque de código que para la ejecución de espera TIEMPO_ESPERA segundos
+     */
+    public static void espera() {
+        try {
+            Thread.sleep(TIEMPO_ESPERA);
+        } catch (InterruptedException e) {
+            System.err.println("No se ha podido hacer la pausa de " + TIEMPO_ESPERA);
         }
     }
 }
