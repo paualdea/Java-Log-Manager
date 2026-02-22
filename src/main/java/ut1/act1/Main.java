@@ -39,7 +39,19 @@ public class Main {
                     switch (opcion) {
                         case 1:
                             limpiarPantalla();
-                            System.out.println();
+
+                            System.out.print("\t\t.:CREACIÓN FICHERO:.\n\nNombre del fichero: ");
+                            String nombre = sc.next();
+
+                            // Creamos el nuevo fichero de texto a partir del nombre
+                            files.nuevoFichero(nombre);
+
+                            // Añadimos un segundo de delay
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                System.err.println("Error haciendo la pausa de 1s");
+                            }
                             break;
                         case 2:
 
